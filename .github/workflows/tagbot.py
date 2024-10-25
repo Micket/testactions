@@ -76,7 +76,6 @@ if labels_add:
         print(f"Failed to add labels: {response.status_code}, {response.text}")
 
 for label in labels_del:
-    for label in labels_del:
     print(f"Removing label: {label} at {url}")
     response = requests.delete(f'{url}/{label}', headers=headers)
     if response.status_code == 200:
