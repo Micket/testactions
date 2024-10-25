@@ -14,7 +14,7 @@ base_branch_name = os.getenv("GITHUB_BASE_REF")
 pr_branch_name = os.getenv("GITHUB_HEAD_REF")
 
 with open(event_path) as f:
-    data = json.load(f.read())
+    data = json.load(f))
 
 pr_number = data['number']
 
