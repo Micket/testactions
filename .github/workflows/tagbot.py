@@ -32,9 +32,6 @@ diff = base_branch.commit.diff(pr_branch.commit)
 new_files = [item.a_path for item in diff if item.change_type == 'A']
 changed_files = [item.a_path for item in diff if item.change_type != 'A']
 
-for item in diff:
-    print(item.change_type)
-
 print("Changed files:", changed_files)
 print("Newly added files:", new_files)
 
