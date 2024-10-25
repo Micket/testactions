@@ -48,7 +48,8 @@ for new_file in new_files:
     else:
         updated_software = True
     for neighbour in neighbours:
-        diffs[neighbour] = diff(neighbour, new_file)
+        #diffs[neighbour] = format_diff(neighbour, new_file)
+        print("Todo, make diff thing")
 
 
 # Adjust labeling
