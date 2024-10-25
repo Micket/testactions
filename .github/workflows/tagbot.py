@@ -4,7 +4,6 @@ import git
 def comparisons(new_file):
     return [1,2,3]
 
-
 token = os.getenv("GITHUB_TOKEN")
 pr_number = os.getenv("GITHUB_EVENT_NUMBER")
 repo = os.getenv("GITHUB_REPOSITORY")
@@ -12,8 +11,9 @@ base_branch_name = os.getenv("GITHUB_BASE_REF")
 pr_branch = os.getenv("GITHUB_HEAD_REF")
 
 repo = git.Repo(".")
-base_branch = repo.branches[base_branch_name]
-pr_branch = repo.branches[pr_branch_name]
+branches = {x.name: x for x in git.branches}
+base_branch = branches[base_branch_name]
+pr_branch = branches[pr_branch_name]
 
 diff = pr_branch.commit.diff(base_branch.commit)
 new_files = [item.a_path for item in diff if item.change_type == 'A']
