@@ -16,7 +16,7 @@ jobs:
 
     - name: Git get
       run: |
-          pip install gitpython
+          pip install gitpython requests
 
     - name: Tag shit
       run: |
