@@ -28,7 +28,7 @@ branches = {x.name: x for x in gitrepo.remote().refs}
 base_branch = branches['origin/' + base_branch_name]
 pr_branch = branches['origin/' + pr_branch_name]
 
-diff = pr_branch.commit.diff(base_branch.commit)
+diff = base_branch.commit.diff(pr_branch.commit)
 new_files = [item.a_path for item in diff if item.change_type == 'A']
 changed_files = [item.a_path for item in diff if item.change_type != 'A']
 
