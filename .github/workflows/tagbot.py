@@ -48,41 +48,29 @@ for new_file in new_files:
         #diffs[neighbour] = format_diff(neighbour, new_file)
         print("Todo, make diff thing")
 
-print(new_software, updated_software)
-
-
 # Adjust labeling
 current_labels = [label['name'] for label in data['pull_request']['labels']]
+new_labels = current_labels.copy()
 
-labels_to_add = []
-labels_to_del = []
 for condition, label in [(changed_files, 'change'), (new_software, 'new'), (updated_software, 'update')]:
     if condition and label not in current_labels:
-       labels_to_add.append(label)
+       new_labels.append(label)
     elif not condition and label in current_labels:
-       labels_to_del.append(label)
-
-url = f"https://{GITHUB_API_URL}/repos/{repo}/issues/{pr_number}/labels"
-
-headers = {
-    "Authorization": f"Bearer {token}",
-    "X-GitHub-Api-Version": f"2022-11-28",
-    "Accept": "application/vnd.github+json",
-}
+       new_labels.remove(label)
 
 if labels_to_add:
-    print(f"Setting labels: {labels_to_add} at {url}")
-    response = requests.post(url, headers=headers, json={"labels": labels_to_add})
-    if response.status_code == 200:
-        print(f"{labels_to_add} added successfully to PR #{pr_number}.")
-    else:
-        print(f"Failed to add labels: {response.status_code}, {response.text}")
+    url = f"https://{GITHUB_API_URL}/repos/{repo}/issues/{pr_number}/labels"
 
-if labels_to_del:
-    print(f"Deleting labels: {labels_to_del} at {url}")
-    response = requests.delete(url, headers=headers, json={"labels": labels_to_del})
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": f"Bearer {token}",
+        "X-GitHub-Api-Version": f"2022-11-28",
+    }
+
+    print(f"Setting labels: {labels_to_add} at {url}")
+    response = requests.put(url, headers=headers, json={"labels": new_labels})
     if response.status_code == 200:
-        print(f"{labels_to_del} removed successfully to PR #{pr_number}.")
+        print(f"{labels_to_add} set successfully to PR #{pr_number}.")
     else:
-        print(f"Failed to remove labels: {response.status_code}, {response.text}")
+        print(f"Failed to set labels: {response.status_code}, {response.text}")
 
