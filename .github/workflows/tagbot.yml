@@ -6,11 +6,24 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
       
     - name: set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: 3.8
+
+    - name: other stuff
+      run: |
+          cat $GITHUB_EVENT_PATH
+
+    - name: Git get
+      run: |
+          git fetch && git branch --list
+          env
+          cat $GITHUB_EVENT_PATH
+          pip install gitpython
 
     - name: Tag shit
       run: |
