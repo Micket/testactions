@@ -9,6 +9,7 @@ pr_number = os.getenv("GITHUB_EVENT_NUMBER")
 repo = os.getenv("GITHUB_REPOSITORY")
 base_branch_name = os.getenv("GITHUB_BASE_REF")
 pr_branch = os.getenv("GITHUB_HEAD_REF")
+print(os.environ)
 
 repo = git.Repo(".")
 branches = {x.name: x for x in repo.branches}
