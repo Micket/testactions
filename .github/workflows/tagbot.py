@@ -50,7 +50,7 @@ for new_file in new_files:
 
 
 # Adjust labeling
-current_labels = data['pull_request']['labels']
+current_labels = [label['name'] for label in data['pull_request']['labels']]
 final_labels = current_labels.copy()
 
 for condition, label in [(changed_files, 'change'), (new_software, 'new'), (updated_software, 'update')]:
