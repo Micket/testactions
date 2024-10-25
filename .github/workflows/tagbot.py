@@ -61,6 +61,7 @@ for condition, label in [(changed_files, 'change'), (new_software, 'new'), (upda
 
 if current_labels != final_labels:
     url = f"https://{GITHUB_API_URL}/repos/{repo}/issues/{pr_number}/labels"
+    print(f"Setting labels: {final_labels} at {url}")
 
     headers = {
         "Authorization": f"Bearer {token}",
