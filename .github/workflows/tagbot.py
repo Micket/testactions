@@ -12,6 +12,7 @@ pr_branch = os.getenv("GITHUB_HEAD_REF")
 
 repo = git.Repo(".")
 branches = {x.name: x for x in repo.branches}
+print(branches)
 base_branch = branches[base_branch_name]
 pr_branch = branches[pr_branch_name]
 
