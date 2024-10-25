@@ -39,7 +39,7 @@ blablabla = f'https://{GITHUB_API_URL}/repos/{repo}/pulls/{pr_number}'
 current_labels = ['todo']
 final_labels = current_labels.copy()
 
-for condition, label in [(changed_files, 'change'), (new_software, 'new'), (updated_softare, 'update')]
+for condition, label in [(changed_files, 'change'), (new_software, 'new'), (updated_softare, 'update')]:
     if condition and label not in final_labels:
        final_labels.append(label)
     elif not condition and label in final_labels:
