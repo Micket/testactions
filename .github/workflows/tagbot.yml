@@ -16,6 +16,10 @@ jobs:
 
     - name: Git get
       run: |
+          cat $GITHUB_EVENT_PATH
+
+    - name: Git get
+      run: |
           git fetch && git branch --list
           env
           cat $GITHUB_EVENT_PATH
