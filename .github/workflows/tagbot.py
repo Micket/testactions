@@ -32,6 +32,9 @@ diff = pr_branch.commit.diff(base_branch.commit)
 new_files = [item.a_path for item in diff if item.change_type == 'A']
 changed_files = [item.a_path for item in diff if item.change_type != 'A']
 
+for item in diff:
+    print(item.change_type)
+
 print("Changed files:", changed_files)
 print("Newly added files:", new_files)
 
@@ -59,7 +62,7 @@ for condition, label in [(changed_files, 'change'), (new_software, 'new'), (upda
        final_labels.remove(label)
 
 if current_labels != final_labels:
-    url = f"{GITHUB_API_URL}/repos/{repo}/pulls/{pr_number}/labels"
+    url = f"https://{GITHUB_API_URL}/repos/{repo}/pulls/{pr_number}/labels"
 
     headers = {
         "Authorization": f"token {token}",
