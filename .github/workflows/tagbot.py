@@ -16,8 +16,7 @@ pr_branch_name = os.getenv("GITHUB_HEAD_REF")
 with open(event_path) as f:
     data = json.load(f)
 
-print(data.keys())
-pr_number = data['number']
+pr_number = data['pull_request']['number']
 
 print(pr_number)
 print(repo)
@@ -49,7 +48,7 @@ for new_file in new_files:
 
 
 # Adjust labeling
-current_labels = data['labels']
+current_labels = data['pull_request']['labels']
 final_labels = current_labels.copy()
 
 for condition, label in [(changed_files, 'change'), (new_software, 'new'), (updated_software, 'update')]:
