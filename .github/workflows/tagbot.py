@@ -60,7 +60,7 @@ for condition, label in [(changed_files, 'change'), (new_software, 'new'), (upda
        final_labels.remove(label)
 
 if current_labels != final_labels:
-    url = f"https://{GITHUB_API_URL}/repos/{repo}/pulls/{pr_number}/labels"
+    url = f"https://{GITHUB_API_URL}/repos/{repo}/issues/{pr_number}/labels"
 
     headers = {
         "Authorization": f"Bearer {token}",
