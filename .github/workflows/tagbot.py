@@ -50,27 +50,37 @@ for new_file in new_files:
 
 # Adjust labeling
 current_labels = [label['name'] for label in data['pull_request']['labels']]
-new_labels = current_labels.copy()
 
+labels_add = []
+labels_del = []
 for condition, label in [(changed_files, 'change'), (new_software, 'new'), (updated_software, 'update')]:
     if condition and label not in current_labels:
-       new_labels.append(label)
+       labels_add.append(label)
     elif not condition and label in current_labels:
-       new_labels.remove(label)
+       labels_del.remove(label)
 
-if labels_to_add:
-    url = f"https://{GITHUB_API_URL}/repos/{repo}/issues/{pr_number}/labels"
+url = f"https://{GITHUB_API_URL}/repos/{repo}/issues/{pr_number}/labels"
 
-    headers = {
-        "Accept": "application/vnd.github+json",
-        "Authorization": f"Bearer {token}",
-        "X-GitHub-Api-Version": f"2022-11-28",
-    }
+headers = {
+    "Accept": "application/vnd.github+json",
+    "Authorization": f"Bearer {token}",
+    "X-GitHub-Api-Version": f"2022-11-28",
+}
 
-    print(f"Setting labels: {labels_to_add} at {url}")
-    response = requests.put(url, headers=headers, json={"labels": new_labels})
+if labels_add:
+    print(f"Setting labels: {labels_add} at {url}")
+    response = requests.post(url, headers=headers, json={"labels": labels_add})
     if response.status_code == 200:
-        print(f"{labels_to_add} set successfully to PR #{pr_number}.")
+        print(f"Labels {labels_add} added successfully.")
     else:
-        print(f"Failed to set labels: {response.status_code}, {response.text}")
+        print(f"Failed to add labels: {response.status_code}, {response.text}")
+
+for label in labels_del:
+    for label in labels_del:
+    print(f"Removing label: {label} at {url}")
+    response = requests.delete(f'{url}/{label}', headers=headers)
+    if response.status_code == 200:
+        print(f"Label {label} removed successfully.")
+    else:
+        print(f"Failed to delete label: {response.status_code}, {response.text}")
 
