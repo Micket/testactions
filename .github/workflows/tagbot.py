@@ -9,15 +9,15 @@ pr_number = os.getenv("GITHUB_EVENT_NUMBER")
 repo = os.getenv("GITHUB_REPOSITORY")
 base_branch_name = os.getenv("GITHUB_BASE_REF")
 pr_branch = os.getenv("GITHUB_HEAD_REF")
-
-repo = git.Repo(".")
-branches = {x.name: x for x in repo.remote().refs}
-
+print(pr_number)
 print(repo)
-print(repo.branches)
-print(branches)
-base_branch = branches[base_branch_name]
-pr_branch = branches[pr_branch_name]
+print(base_branch_name)
+print(pr_branch)
+
+gitrepo = git.Repo(".")
+branches = {x.name: x for x in gitrepo.remote().refs}
+base_branch = branches['origin/' + base_branch_name]
+pr_branch = branches['origin/' + pr_branch_name]
 
 diff = pr_branch.commit.diff(base_branch.commit)
 new_files = [item.a_path for item in diff if item.change_type == 'A']
