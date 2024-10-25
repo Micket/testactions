@@ -1,16 +1,23 @@
 import os
 import git
 import requests
+import json
 
 def comparisons(new_file):
     return [1,2,3]
 
-GITHUB_API_URL='api.github.com'
+GITHUB_API_URL = 'api.github.com'
+event_path = os.getenv("GITHUB_EVENT_PATH")
 token = os.getenv("GITHUB_TOKEN")
-pr_number = os.getenv("GITHUB_EVENT_NUMBER")
 repo = os.getenv("GITHUB_REPOSITORY")
 base_branch_name = os.getenv("GITHUB_BASE_REF")
 pr_branch_name = os.getenv("GITHUB_HEAD_REF")
+
+with open(event_path) as f:
+    data = json.load(f.read()
+
+pr_number = data['number']
+
 print(pr_number)
 print(repo)
 print(base_branch_name)
@@ -40,9 +47,8 @@ for new_file in new_files:
         diffs[neighbour] = diff(neighbour, new_file)
 
 
-# Get current labels
-blablabla = f'https://{GITHUB_API_URL}/repos/{repo}/pulls/{pr_number}'
-current_labels = ['todo']
+# Adjust labeling
+current_labels = data['labels']
 final_labels = current_labels.copy()
 
 for condition, label in [(changed_files, 'change'), (new_software, 'new'), (updated_software, 'update')]:
