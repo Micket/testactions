@@ -21,10 +21,10 @@ jobs:
       run: |
           pip install gitpython requests
 
-    - env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Tag shit
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
           python .github/workflows/tagbot.py
 
