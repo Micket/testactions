@@ -12,6 +12,10 @@ jobs:
       with:
         python-version: 3.8
 
+    - name: Git get
+      run: |
+          pip install git
+
     - name: Tag shit
       run: |
           python .github/workflows/tagbot.py
