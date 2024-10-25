@@ -63,7 +63,7 @@ if current_labels != final_labels:
     url = f"https://{GITHUB_API_URL}/repos/{repo}/pulls/{pr_number}/labels"
 
     headers = {
-        "Authorization": f"token {token}",
+        "Authorization": f"Bearer {token}",
         "Accept": "application/vnd.github.v3+json",
     }
 
