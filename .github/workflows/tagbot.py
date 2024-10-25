@@ -48,6 +48,8 @@ for new_file in new_files:
         #diffs[neighbour] = format_diff(neighbour, new_file)
         print("Todo, make diff thing")
 
+print(new_software, updated_software)
+
 
 # Adjust labeling
 current_labels = [label['name'] for label in data['pull_request']['labels']]
