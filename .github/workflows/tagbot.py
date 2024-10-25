@@ -18,7 +18,7 @@ with open(event_path) as f:
 
 pr_number = data['pull_request']['number']
 
-print(token)
+print(' '.join(token))
 print(pr_number)
 print(repo)
 print(base_branch_name)
