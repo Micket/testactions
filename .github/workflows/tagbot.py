@@ -8,7 +8,7 @@ def comparisons(new_file):
 
 GITHUB_API_URL = 'api.github.com'
 event_path = os.getenv("GITHUB_EVENT_PATH")
-token = os.getenv("GITHUB_TOKEN")
+token = os.getenv("GH_TOKEN")
 repo = os.getenv("GITHUB_REPOSITORY")
 base_branch_name = os.getenv("GITHUB_BASE_REF")
 pr_branch_name = os.getenv("GITHUB_HEAD_REF")
