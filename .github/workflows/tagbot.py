@@ -18,6 +18,7 @@ with open(event_path) as f:
 
 pr_number = data['pull_request']['number']
 
+print(token)
 print(pr_number)
 print(repo)
 print(base_branch_name)
@@ -64,6 +65,7 @@ if current_labels != final_labels:
 
     headers = {
         "Authorization": f"Bearer {token}",
+        "X-GitHub-Api-Version": f"2022-11-28",
         "Accept": "application/vnd.github.v3+json",
     }
 
