@@ -8,18 +8,17 @@ jobs:
   tagbot:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
       
     - name: set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: 3.8
 
     - name: Git get
-      run: |
-          pip install gitpython requests
+      run: pip install gitpython requests
 
     - name: Tag shit
       env:
