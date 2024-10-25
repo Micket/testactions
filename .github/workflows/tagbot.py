@@ -51,27 +51,36 @@ for new_file in new_files:
 
 # Adjust labeling
 current_labels = [label['name'] for label in data['pull_request']['labels']]
-final_labels = current_labels.copy()
 
+labels_to_add = []
+labels_to_del = []
 for condition, label in [(changed_files, 'change'), (new_software, 'new'), (updated_software, 'update')]:
-    if condition and label not in final_labels:
-       final_labels.append(label)
-    elif not condition and label in final_labels:
-       final_labels.remove(label)
+    if condition and label not in current_labels
+       labels_to_add.append(label)
+    elif not condition and label in current_labels:
+       labels_to_del.append(label)
 
-if current_labels != final_labels:
-    url = f"https://{GITHUB_API_URL}/repos/{repo}/issues/{pr_number}/labels"
-    print(f"Setting labels: {final_labels} at {url}")
+url = f"https://{GITHUB_API_URL}/repos/{repo}/issues/{pr_number}/labels"
 
-    headers = {
-        "Authorization": f"Bearer {token}",
-        "X-GitHub-Api-Version": f"2022-11-28",
-        "Accept": "application/vnd.github+json",
-    }
+headers = {
+    "Authorization": f"Bearer {token}",
+    "X-GitHub-Api-Version": f"2022-11-28",
+    "Accept": "application/vnd.github+json",
+}
 
-    response = requests.post(url, headers=headers, json={"labels": final_labels})
+if labels_to_add:
+    print(f"Setting labels: {labels_to_add} at {url}")
+    response = requests.post(url, headers=headers, json={"labels": labels_to_add})
     if response.status_code == 200:
-        print(f"{final_labels} added successfully to PR #{pr_number}.")
+        print(f"{labels_to_add} added successfully to PR #{pr_number}.")
     else:
-        print(f"Failed to set labels: {response.status_code}, {response.text}")
+        print(f"Failed to add labels: {response.status_code}, {response.text}")
+
+if labels_to_del:
+    print(f"Deleting labels: {labels_to_del} at {url}")
+    response = requests.post(url, headers=headers, json={"labels": labels_to_del})
+    if response.status_code == 200:
+        print(f"{labels_to_del} removed successfully to PR #{pr_number}.")
+    else:
+        print(f"Failed to remove labels: {response.status_code}, {response.text}")
 
