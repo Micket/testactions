@@ -18,7 +18,6 @@ with open(event_path) as f:
 
 pr_number = data['pull_request']['number']
 
-print(' '.join(token))
 print(pr_number)
 print(repo)
 print(base_branch_name)
@@ -66,10 +65,10 @@ if current_labels != final_labels:
     headers = {
         "Authorization": f"Bearer {token}",
         "X-GitHub-Api-Version": f"2022-11-28",
-        "Accept": "application/vnd.github.v3+json",
+        "Accept": "application/vnd.github+json",
     }
 
-    response = requests.post(url, headers=headers, json={"labels": [final_labels]})
+    response = requests.post(url, headers=headers, json={"labels": final_labels})
     if response.status_code == 200:
         print(f"{final_labels} added successfully to PR #{pr_number}.")
     else:
