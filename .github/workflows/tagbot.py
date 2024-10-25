@@ -78,7 +78,7 @@ if labels_to_add:
 
 if labels_to_del:
     print(f"Deleting labels: {labels_to_del} at {url}")
-    response = requests.post(url, headers=headers, json={"labels": labels_to_del})
+    response = requests.delete(url, headers=headers, json={"labels": labels_to_del})
     if response.status_code == 200:
         print(f"{labels_to_del} removed successfully to PR #{pr_number}.")
     else:
