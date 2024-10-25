@@ -18,6 +18,7 @@ jobs:
       run: |
           git fetch && git branch --list
           env
+          cat $GITHUB_EVENT_PATH
           pip install gitpython
 
     - name: Tag shit
