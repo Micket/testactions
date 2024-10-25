@@ -4,6 +4,7 @@ import git
 def comparisons(new_file):
     return [1,2,3]
 
+GITHUB_API_URL='api.github.com'
 token = os.getenv("GITHUB_TOKEN")
 pr_number = os.getenv("GITHUB_EVENT_NUMBER")
 repo = os.getenv("GITHUB_REPOSITORY")
