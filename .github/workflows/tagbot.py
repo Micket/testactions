@@ -55,7 +55,7 @@ current_labels = [label['name'] for label in data['pull_request']['labels']]
 labels_to_add = []
 labels_to_del = []
 for condition, label in [(changed_files, 'change'), (new_software, 'new'), (updated_software, 'update')]:
-    if condition and label not in current_labels
+    if condition and label not in current_labels:
        labels_to_add.append(label)
     elif not condition and label in current_labels:
        labels_to_del.append(label)
