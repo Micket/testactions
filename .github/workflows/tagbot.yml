@@ -17,6 +17,7 @@ jobs:
     - name: Git get
       run: |
           git fetch && git branch --list
+          env
           pip install gitpython
 
     - name: Tag shit
