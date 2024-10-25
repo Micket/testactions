@@ -1,5 +1,6 @@
 import os
 import git
+import requests
 
 def comparisons(new_file):
     return [1,2,3]
