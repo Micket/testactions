@@ -1,0 +1,15 @@
+name: Test run with write
+on: [pull_request_target]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  tagbot:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Git get
+      run: pip install numpy
+
